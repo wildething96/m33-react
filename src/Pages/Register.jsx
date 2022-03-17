@@ -1,37 +1,39 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import styled from "styled-components";
-import { getUser } from "../utils";
-const bcrypt = require("bcryptjs");
+import { postUser } from "../utils";
 
-export const Login = ({ setAccount }) => {
+export const Register = () => {
+  const [email, setEmail] = useState();
+  const [name, setName] = useState();
   const [user, setUser] = useState();
   const [pass, setPass] = useState();
-  
 
   let navigate = useNavigate();
 
-  const login = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      const account = await getUser(user, login);
-      if (await bcrypt.compare(pass, account.pass)) {
-        setAccount(account);
-        setUser("");
-        setPass("");
-        navigate("/")
-      } else {
-        console.log("No match");
-      }
-    } catch (error) {}
+      postUser(name, user, email, pass);
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <div>
-      <Flex>
+      <Flex onSubmit={handleSubmit}>
         <h1>Instagram</h1>
+        <input
+          placeholder="Email addres"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          placeholder="Full Name"
+          onChange={(e) => setName(e.target.value)}
+        />
         <input
           placeholder="Username"
           onChange={(e) => setUser(e.target.value)}
@@ -40,11 +42,11 @@ export const Login = ({ setAccount }) => {
           placeholder="Password"
           onChange={(e) => setPass(e.target.value)}
         />
-        <button onClick={(e) => login(e)}>Login</button>
+        <button>Register</button>
       </Flex>
       <Flex>
         <p>
-          Don't have an account? <span>Sign up</span>
+          Have an account? <span>Sign up</span>
         </p>
       </Flex>
     </div>
@@ -69,10 +71,10 @@ const Flex = styled.form`
     padding: 0.8rem 0.5rem;
     background: #f5f7fa;
   }
-  span {
-    color: blue;
-  }
   button {
     cursor: pointer;
+  }
+  span {
+    color: blue;
   }
 `;
