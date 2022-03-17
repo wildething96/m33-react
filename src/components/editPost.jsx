@@ -56,7 +56,7 @@ export const EditPost = ({ id, index, setList, list }) => {
                   onChange={(e) => setMessage(e.target.value)}
                 />
                 <br />
-                <button onClick={handleSubmit}>Change</button>
+                <button>Change</button>
               </form>
             ) : (
               <div>

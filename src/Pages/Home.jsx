@@ -48,11 +48,15 @@ export const Home = ({ account }) => {
         <Flex>
           {list.map((item, index) => (
             <Post key={item.id}>
-  
               {/* <h2 key={index}>{item}</h2> */}
               <Title>
                 <div>{item.author}</div>
-                <EditPost id={item.id} index={index} setList={setList} list={list}/>
+                <EditPost
+                  id={item.id}
+                  index={index}
+                  setList={setList}
+                  list={list}
+                />
               </Title>
               <Image src={item.url} />
               <div>
@@ -62,13 +66,12 @@ export const Home = ({ account }) => {
                   <div>tag</div>
                 </Reaction>
                 <Comments>
-                  <div>
-                    <div></div>
+                  <Content>
                     <p>
                       Liked by <span>Name</span> and <span>5</span> others
                     </p>
                     <p>{item.message}</p>
-                  </div>
+                  </Content>
                   <div></div>
                 </Comments>
               </div>
@@ -124,10 +127,16 @@ const Reaction = styled.div`
   }
 `;
 
+const Content = styled.div`
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  `;
+
 const Comments = styled.div`
   div {
     display: flex;
-    align-items: center;
+    align-items: start;
     div: nth-child(1) {
       text-align: center;
       margin: 1rem;

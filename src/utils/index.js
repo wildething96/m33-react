@@ -89,7 +89,6 @@ export const updatePost = async (_id, url, message) => {
     });
     const data = await response.json();
     console.log(data);
-    return data;
   } catch (error) {
     console.log(error);
   }
