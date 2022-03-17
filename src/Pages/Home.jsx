@@ -19,7 +19,6 @@ export const Home = ({ account }) => {
     );
 
     const data = await response.json();
-    console.log(data[0]);
 
     const postArray = [];
 
@@ -47,13 +46,13 @@ export const Home = ({ account }) => {
       <PostCreator author={account.username}></PostCreator>
       <Container>
         <Flex>
-          {list.map((item) => (
+          {list.map((item, index) => (
             <Post key={item.id}>
-              {console.log(item)}
+  
               {/* <h2 key={index}>{item}</h2> */}
               <Title>
                 <div>{item.author}</div>
-                <EditPost id={item.id} />
+                <EditPost id={item.id} index={index} setList={setList} list={list}/>
               </Title>
               <Image src={item.url} />
               <div>

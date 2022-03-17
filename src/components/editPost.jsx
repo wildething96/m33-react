@@ -2,21 +2,37 @@ import styled from "styled-components";
 import { useState } from "react";
 import { updatePost, deletePost } from "../utils";
 
-export const EditPost = ({ id }) => {
+export const EditPost = ({ id, index, setList, list }) => {
   const [open, setOpen] = useState(false);
   const [edit, setEdit] = useState(false);
   const [url, setUrl] = useState();
   const [message, setMessage] = useState();
   //   const [open, setOpen] = useState(false);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        try {
-            updatePost(id ,url, message)
-        } catch (error) {
-            
-        }
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try {
+      const temp = [...list];
+      if (message === undefined && url === undefined) {
+        console.log("No change");
+      } else if (url === undefined && message !== undefined) {
+        updatePost(id, url, message);
+        temp[index].message = message;
+        updatePost(id, url, message);
+      } else if (url !== undefined && message === undefined) {
+        updatePost(id, url, message);
+        temp[index].url = url;
+      } else {
+        updatePost(id, url, message);
+        temp[index].url = url;
+        temp[index] = message;
+      }
+
+      if (temp !== [...list]) {
+        setList(temp);
+      }
+    } catch (error) {}
+  };
   return (
     <div>
       <button onClick={() => setOpen(!open)}>...</button>
@@ -26,11 +42,19 @@ export const EditPost = ({ id }) => {
             {edit ? (
               <form onSubmit={handleSubmit}>
                 <label htmlFor="url">URL:</label> <br />
-                <input id="url" type="text" onChange={(e) => setUrl(e.target.value)}/>
+                <input
+                  id="url"
+                  type="text"
+                  onChange={(e) => setUrl(e.target.value)}
+                />
                 <br />
                 <label htmlFor="message">Message: </label>
                 <br />
-                <input id="message" type="text" onChange={(e) => setMessage(e.target.value)}/>
+                <input
+                  id="message"
+                  type="text"
+                  onChange={(e) => setMessage(e.target.value)}
+                />
                 <br />
                 <button onClick={handleSubmit}>Change</button>
               </form>
