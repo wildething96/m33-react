@@ -16,6 +16,7 @@ export const PostCreator = ({ author }) => {
 
   return (
     <div>
+      <h2>Please Login before creating a post!</h2>
       <form onSubmit={submitHandler}>
         <input
           placeholder="Image URL"
