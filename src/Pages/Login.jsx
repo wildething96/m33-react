@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import styled from "styled-components";
 import { getUser } from "../utils";
 const bcrypt = require("bcryptjs");
@@ -9,7 +8,6 @@ const bcrypt = require("bcryptjs");
 export const Login = ({ setAccount }) => {
   const [user, setUser] = useState();
   const [pass, setPass] = useState();
-  
 
   let navigate = useNavigate();
 
@@ -21,7 +19,7 @@ export const Login = ({ setAccount }) => {
         setAccount(account);
         setUser("");
         setPass("");
-        navigate("/")
+        navigate("/");
       } else {
         console.log("No match");
       }
@@ -44,7 +42,8 @@ export const Login = ({ setAccount }) => {
       </Flex>
       <Flex>
         <p>
-          Don't have an account? <span>Sign up</span>
+          Don't have an account?{" "}
+          <span onClick={() => navigate("/register")}>Sign up</span>
         </p>
       </Flex>
     </div>
@@ -71,6 +70,7 @@ const Flex = styled.form`
   }
   span {
     color: blue;
+    cursor: pointer;
   }
   button {
     cursor: pointer;

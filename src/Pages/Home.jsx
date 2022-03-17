@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { PostCreator } from "../components/postCreator";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { PostCreator } from "../components/postCreator";
 import { getPost } from "../utils";
 import { EditPost } from "../components/editPost";
 
 export const Home = ({ account }) => {
   const [list, setList] = useState([]);
+  let navigate = useNavigate();
 
   const getData = async () => {
     const postContent = await getPost();
@@ -40,6 +42,8 @@ export const Home = ({ account }) => {
 
   return (
     <div>
+      <button onClick={() => navigate("/login")}>Login</button>
+      <button onClick={() => navigate("/register")}>Home</button>
       <PostCreator author={account.username}></PostCreator>
       <Container>
         <Flex>

@@ -46,7 +46,8 @@ export const Register = () => {
       </Flex>
       <Flex>
         <p>
-          Have an account? <span>Sign up</span>
+          Have an account?{" "}
+          <span onClick={() => navigate("/login")}>Sign In</span>
         </p>
       </Flex>
     </div>
@@ -76,5 +77,6 @@ const Flex = styled.form`
   }
   span {
     color: blue;
+    cursor: pointer;
   }
 `;
