@@ -76,7 +76,6 @@ export const getPost = async () => {
 };
 
 export const updatePost = async (_id, url, message) => {
-  console.log("Data", _id, url, message);
   try {
     const response = await fetch(`${process.env.REACT_APP_REST_API}update`, {
       method: "POST",

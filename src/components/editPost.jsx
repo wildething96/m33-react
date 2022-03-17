@@ -16,7 +16,6 @@ export const EditPost = ({ id, index, setList, list }) => {
       if (message === undefined && url === undefined) {
         console.log("No change");
       } else if (url === undefined && message !== undefined) {
-        updatePost(id, url, message);
         temp[index].message = message;
         updatePost(id, url, message);
       } else if (url !== undefined && message === undefined) {
